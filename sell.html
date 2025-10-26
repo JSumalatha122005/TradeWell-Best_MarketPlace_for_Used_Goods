@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TradeWell - Sell Item</title>
+    <link rel="icon" type="image/png" href="https://tse1.mm.bing.net/th/id/OIP.eliQ98n5bIhzdbRyverlAwHaHa?pid=Api&P=0&h=180"/>
+  <style>
+      .container{
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 6px;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+     <div class="header-content">
+        <div id="logo"><img  id ="logo" src="https://tse1.mm.bing.net/th/id/OIP.eliQ98n5bIhzdbRyverlAwHaHa?pid=Api&P=0&h=180"></div> <h1>TradeWell - Best MarketPlace for Used Goods</h1>
+    </div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="sell.html">Sell</a>
+      <a href="cart.html">Cart</a>
+      <a href="favorite.html">Favorites</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Post Your Item for Sale</h2>
+    <form id="sellForm">
+      <input type="text" id="title" placeholder="Item Title" required>
+      <textarea id="description" placeholder="Item Description" required></textarea>
+      <input type="number" id="price" placeholder="Price" required>
+      <label for="imageFile">Upload Image:</label>
+      <input type="file" id="imageFile" accept="image/*">
+      <img id="preview" alt="Image Preview">
+
+      <select id="category" required>
+        <option value="">Select Category</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Books">Books</option>
+        <option value="Vehicles">Vehicles</option>
+        <option value="Others">Others</option>
+      </select>
+      <button type="submit">Post Item</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Used Goods Marketplace
+  </footer>
+
+  <script>
+    const imageInput = document.getElementById("imageFile");
+    const preview = document.getElementById("preview");
+    let uploadedImageBase64 = "";
+    imageInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          uploadedImageBase64 = e.target.result;
+          preview.src = uploadedImageBase64;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById("sellForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value.trim();
+      const description = document.getElementById("description").value.trim();
+      const price = document.getElementById("price").value.trim();
+      const category = document.getElementById("category").value;
+
+      if (!title || !description || !price || !category) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const imageUrl = uploadedImageBase64 || "https://via.placeholder.com/200";
+
+      const newProduct = {
+        title,
+        description,
+        price,
+        imageUrl,
+        category,
+        timestamp: Date.now()
+      };
+
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+      products.push(newProduct);
+      localStorage.setItem("products", JSON.stringify(products));
+
+      alert("Item posted successfully!");
+      document.getElementById("sellForm").reset();
+      preview.style.display = "none";
+      uploadedImageBase64 = "";
+    });
+  </script>
+
+</body>
+</html>

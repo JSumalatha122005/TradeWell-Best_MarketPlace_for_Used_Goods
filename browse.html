@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TradeWell - Browse Items</title>
+  <link rel="icon" type="image/png" href="https://tse1.mm.bing.net/th/id/OIP.eliQ98n5bIhzdbRyverlAwHaHa?pid=Api&P=0&h=180"/>
+  <link rel="stylesheet" href="style_browse.css">
+  
+</head>
+<body>
+
+  <header>
+     <div class="header-content">
+        <div id="logo"><img  id ="logo" src="https://tse1.mm.bing.net/th/id/OIP.eliQ98n5bIhzdbRyverlAwHaHa?pid=Api&P=0&h=180"></div> <h1>TradeWell - Best MarketPlace for Used Goods</h1>
+    </div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="sell.html">Sell</a>
+       <a href="cart.html">Cart</a>
+       <a href="favorite.html">Favorites</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Browse All Listings</h2>
+    <div class="filters">
+      <input type="text" id="searchInput" placeholder="Search items...">
+      <select id="categoryFilter">
+        <option value="">All Categories</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Books">Books</option>
+        <option value="Vehicles">Vehicles</option>
+        <option value="Others">Others</option>
+      </select>
+      <select id="sortBy">
+        <option value="">Sort By</option>
+        <option value="priceAsc">Price: Low to High</option>
+        <option value="priceDesc">Price: High to Low</option>
+        <option value="newest">Newest First</option>
+      </select>
+    </div>
+    <div id="productList" class="product-listing"></div>
+    <div id="noResults" class="no-results" style="display: none;">No items match your search.</div>
+  </div>
+
+  <footer>
+    &copy; 2025 Used Goods Marketplace
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

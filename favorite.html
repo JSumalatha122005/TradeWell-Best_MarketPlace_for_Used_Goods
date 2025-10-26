@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TradeWell - Favorites</title>
+    <link rel="icon" type="image/png" href="https://tse1.mm.bing.net/th/id/OIP.eliQ98n5bIhzdbRyverlAwHaHa?pid=Api&P=0&h=180"/>
+  <style>
+    .container { 
+      max-width: 1000px; 
+      margin: auto; 
+      padding: 20px; 
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+     <div class="header-content">
+        <div id="logo"><img  id ="logo" src="https://tse1.mm.bing.net/th/id/OIP.eliQ98n5bIhzdbRyverlAwHaHa?pid=Api&P=0&h=180"></div> <h1>TradeWell - Best MarketPlace for Used Goods</h1>
+    </div>
+    <nav>
+       <a href="home.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="sell.html">Sell</a>
+       <a href="cart.html">Cart</a>
+       <a href="favorite.html">Favorites</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container" id="favContainer"></div>
+
+  <footer>
+    &copy; 2025 Used Goods Marketplace
+  </footer>
+
+  <script>
+    const currentUser = localStorage.getItem("loggedInUser");
+    if (!currentUser) {
+      alert("Please login to view favorites.");
+      window.location.href = "login.html";
+    }
+
+    const key = "favorites_" + currentUser;
+    const favs = JSON.parse(localStorage.getItem(key)) || [];
+    const container = document.getElementById("favContainer");
+
+    if (favs.length === 0) {
+      container.innerHTML = "<p>No favorites yet.</p>";
+    } else {
+      favs.forEach(item => {
+        const card = document.createElement("div");
+        card.classList.add("product-card");
+        card.innerHTML = `
+          <img src="${item.imageUrl}" alt="${item.title}">
+          <h4>${item.title}</h4>
+          <p><strong>Price:</strong> $${item.price}</p>
+          <p>${item.description}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
